@@ -6,7 +6,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter
@@ -20,14 +19,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "first_name")
-    private String firstName;
+    @Column
+    private String login;
 
-    @Column(name = "last_name")
-    private String lastName;
+    @Column
+    private String password;
 
-    private LocalDate birthday;
+    @Enumerated
+    private Role role;
 
-    @OneToMany(mappedBy = "user")       // название поля
-    private List<Post> posts;
+    @Column(name = "created_at")
+    private LocalDate createdAt;
 }

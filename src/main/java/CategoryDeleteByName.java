@@ -29,10 +29,9 @@ public class CategoryDeleteByName {
             }
 
             entityManager.remove(category);
-
             entityManager.getTransaction().commit();
 
-            System.out.println("Категория \"" + categoryName + "\" успешно удалена!");
+            System.out.printf("Категория %s успешно удалена!", categoryName);
 
         } catch (Exception e) {
             entityManager.getTransaction().rollback();

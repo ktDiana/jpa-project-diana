@@ -15,27 +15,31 @@ public class CategoryCreate {
 
         try {
             entityManager.getTransaction().begin();
-
+            // вводим название новой категории
             System.out.println("Введите название категории: ");
             String categoryScanner = scanner.nextLine();
             Category category = new Category();
             category.setName(categoryScanner);
-
+            // сохраняем новую категорию
             entityManager.persist(category);
 
+            // вводим новые хаарктеристики
             System.out.println("Введите названия характеристик (через запятую): ");
             String optionScanner = scanner.nextLine();
             String[] optionNames = optionScanner.split(",\\s*");
 
+            // формируем характеристику
             for (String optionName : optionNames) {
                 Option option = new Option();
                 option.setName(optionName);
-                option.setCategory(category); // Ссылка на уже сохранённую категорию
-                entityManager.persist(option); // Сохраняем каждую характеристику
+                // ссылка на уже сохранённую категорию
+                option.setCategory(category);
+                // сохраняем характеристику
+                entityManager.persist(option);
             }
 
             entityManager.getTransaction().commit();
-            System.out.println("Категория создана вместе с характеристиками!");
+            System.out.println("Категория успешно создана!");
 
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
